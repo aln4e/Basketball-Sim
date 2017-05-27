@@ -7,7 +7,7 @@ class Index extends Component {
     return (
       <div>
         <Header />
-        <Link to={`/create`}>Create Cat</Link>
+        <Link to={`/create`}>Register Human</Link>
       </div>
     );
   }

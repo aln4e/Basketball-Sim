@@ -28,7 +28,6 @@ class Create extends Component {
     this.setState({
       person:person
     })
-    console.log(this.state.person)
   }
 
   render() {
