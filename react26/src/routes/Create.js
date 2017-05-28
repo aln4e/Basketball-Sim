@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import Header from '../components/Header'
+import {updatePeople} from '../actions'
+
 
 class Create extends Component {
   constructor(props){
@@ -10,15 +12,40 @@ class Create extends Component {
         name:'',
         age: 1,
         sex: ''
-      }
+      },
+      message:""
     }
   }
 
-//this doesn't do anything at all
-//eventually, it needs to fetch all of the rows in the table using the store
+//REVIEW!!!
   handleSubmit(e){
+    var self = this
     e.preventDefault()
-    console.log(this.state.person)
+    const params = {
+      method:'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(this.state)
+    }
+    fetch("http://localhost:3001/add", params).then(function(response){
+      if(response.status === 200){
+        response.json().then(function(body){
+          self.setState({
+            person:body.person,
+            message:'added person to registry'
+          })
+          updatePeople()
+        })
+      } else {
+        self.setState({
+          message:'error'
+        })
+      }
+    }).catch(function(error){
+      console.log(error)
+      self.setState({
+        message:"there was an error"
+      })
+    })
   }
 
   handleChange(e){
@@ -34,8 +61,11 @@ class Create extends Component {
     return (
       <div>
         <Header />
-        <Link to={`/`} >Index </Link>
+        <div className='pull-right'>
+          <Link to={`/`} >Index </Link>
+        </div>
         <h2 className="App-intro">Please fill out this form!</h2>
+        <h4>{this.state.message}</h4>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <div>
             <label>Name</label>

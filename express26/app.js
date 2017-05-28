@@ -18,18 +18,27 @@ app.get('/', function (request, response) {
  response.json({message: 'Homepage success'});
 });
 
+app.get('/list', function(request,response){
+  Person.findAll().then(function(people){
+    response.status(200)
+    response.json({
+      people:people
+    })
+  }).catch(function(err){
+    response.status(400)
+    response.json({message:error})
+  })
+})
+
 //3) Ultimately we want to take the inputs and add a new row to the model using the create method.
 //4) To update multiple fields, we pass an object of the field to be updated with the contents we wish to update them to
 app.post('/add', function (request, response) {
-  Person.create(
-    {
-      name: request.body.person.name,
-      age: request.body.person.age,
-      sex: request.body.person.sex
-    }
-  ).then((newPerson)=>{
+  let personInputs = request.body.person
+  Person.create(personInputs)
+  .then((newPerson)=>{
     response.status(200)
     response.json({
+      message: 'success',
       person: newPerson
     })
   }).catch((error)=>{

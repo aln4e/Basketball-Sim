@@ -1,13 +1,48 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import Header from '../components/Header'
+import store from '../stores/HumanStore'
+import PersonListing from './Listing'
 
 class Index extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      people: store.getPeople()
+    }
+  }
+
+  updatePeople(){
+    this.setState({
+      people: store.getPeople()
+    })
+  }
+
+  componentWillMount(){
+    store.on('change', this.updatePeople.bind(this))
+  }
+
+  renderPeople(){
+    let personRender = []
+    for(var i = 0; i<this.state.people.length; i++){
+      personRender.push(
+        <PersonListing person={this.state.people[i]}></PersonListing>
+      )
+    }
+    return personRender
+  }
+
   render() {
     return (
       <div>
         <Header />
-        <Link to={`/create`}>Register Human</Link>
+        <div className= 'pull-right'>
+          <Link to={`/create`}>Register Human</Link>
+        </div>
+        <h2>Human Registry</h2>
+        <div className='row'>
+          {this.renderPeople()}
+        </div>
       </div>
     );
   }
