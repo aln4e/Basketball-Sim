@@ -41,11 +41,12 @@ class Index extends Component {
         <div className= 'pull-right'>
           <Link to={`/create`}>Create Human</Link>
         </div>
-        <div>
+        <br />
+        <div className='pull-right'>
           <Link to={`/login`} >Register as User </Link>
         </div>
         <h2>Human Registry</h2>
-        <div className='row'>
+        <div className="cat-list row">
           {this.renderPeople()}
         </div>
       </div>
