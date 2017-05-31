@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import Header from '../components/Header'
-import {updatePeople} from '../actions'
-
+import {updatePeople, createHuman} from '../actions'
+// import store from '../stores/HumanStore'
 
 class Create extends Component {
   constructor(props){
@@ -17,35 +17,10 @@ class Create extends Component {
     }
   }
 
-//REVIEW!!!
   handleSubmit(e){
-    var self = this
     e.preventDefault()
-    const params = {
-      method:'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(this.state)
-    }
-    fetch("http://localhost:3001/add", params).then(function(response){
-      if(response.status === 200){
-        response.json().then(function(body){
-          self.setState({
-            person:body.person,
-            message:'added person to registry'
-          })
-          updatePeople()
-        })
-      } else {
-        self.setState({
-          message:'error'
-        })
-      }
-    }).catch(function(error){
-      console.log(error)
-      self.setState({
-        message:"there was an error"
-      })
-    })
+    createHuman(this.state)
+    updatePeople(this.state)
   }
 
   handleChange(e){
@@ -62,32 +37,66 @@ class Create extends Component {
       <div>
         <Header />
         <div className='pull-right'>
-          <Link to={`/`} >Index </Link>
+          <Link to={`/`} >Index of Humans</Link>
         </div>
-        <h2 className="App-intro">Please fill out this form!</h2>
-        <h4>{this.state.message}</h4>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <div>
-            <label>Name</label>
-            <input type='text' name='name' value={this.state.person.name} onChange={this.handleChange.bind(this)} />
+        <br />
+        <div className='pull-right'>
+          <Link to={`/login`} >Register as User </Link>
+        </div>
+
+        <div className='container'>
+          <div className='row'>
+            <div className='col-xs-6 col-xs-offset-3'>
+              <div className='panel panel-default'>
+                <div className='panel-body'>
+                  <h2>Please fill out this form!</h2>
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+
+                    <div className='row'>
+                      <div className='col-xs-12'>
+                        <div className='form-group'>
+                          <label>Name</label>
+                          <input type='text' name='name' value={this.state.person.name} onChange={this.handleChange.bind(this)} />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className='row'>
+                      <div className='col-xs-12'>
+                        <div className='form-group'>
+                          <label>Age</label>
+                          <input type='number' name='age' value={this.state.person.age} onChange={this.handleChange.bind(this)} />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className='row'>
+                      <div className='col-xs-12'>
+                        <div className='form-group'>
+                          <label>Sex</label>
+                          <select name='sex' value={this.state.person.sex} onChange={this.handleChange.bind(this)}>
+                            <option></option>
+                            <option>Male</option>
+                            <option>Female</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className='row'>
+                      <div className='col-xs-12'>
+                        <div className='form-group'>
+                          <input type='submit' value='Submit' />
+                        </div>
+                      </div>
+                    </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <label>Age</label>
-            <input type='number' name='age' value={this.state.person.age} onChange={this.handleChange.bind(this)} />
-          </div>
-          <div>
-            <label>Sex</label>
-            <select name='sex' value={this.state.person.sex} onChange={this.handleChange.bind(this)}>
-              <option></option>
-              <option>Male</option>
-              <option>Female</option>
-            </select>
-          </div>
-          <div>
-            <input type='submit' value='Submit' />
-          </div>
-        </form>
-      </div>
+        </div>
     );
   }
 }

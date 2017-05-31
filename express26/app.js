@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 var app = express();
 //2) Added the model
 var Person = require('./models').Person
+var User = require('./models').User
 //6)Add cors allows our express and react to make calls to each other
 var cors = require('cors')
 const corsOptions = { origin: 'http://localhost:3001' }
@@ -40,6 +41,23 @@ app.post('/add', function (request, response) {
     response.json({
       message: 'success',
       person: newPerson
+    })
+  }).catch((error)=>{
+    response.status(400)
+    response.json({
+      message: error
+    })
+  })
+})
+
+app.post('/login', function (request, response) {
+  let userInputs = request.body.user
+  User.create(userInputs)
+  .then((newUser)=>{
+    response.status(200)
+    response.json({
+      message: 'you have registered!',
+      user: newUser
     })
   }).catch((error)=>{
     response.status(400)

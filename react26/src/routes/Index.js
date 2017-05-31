@@ -2,19 +2,21 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import Header from '../components/Header'
 import store from '../stores/HumanStore'
-import PersonListing from './Listing'
+import PersonListing from '../components/Listing'
 
 class Index extends Component {
   constructor(props){
     super(props)
     this.state = {
-      people: store.getPeople()
+      people: store.getPeople(),
+      message: store.getMessage()
     }
   }
 
   updatePeople(){
     this.setState({
-      people: store.getPeople()
+      people: store.getPeople(),
+      message: store.getMessage()
     })
   }
 
@@ -37,7 +39,10 @@ class Index extends Component {
       <div>
         <Header />
         <div className= 'pull-right'>
-          <Link to={`/create`}>Register Human</Link>
+          <Link to={`/create`}>Create Human</Link>
+        </div>
+        <div>
+          <Link to={`/login`} >Register as User </Link>
         </div>
         <h2>Human Registry</h2>
         <div className='row'>
