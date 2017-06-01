@@ -1,20 +1,36 @@
-//bodyparser since we need to read the form
-//also need body parser to send/receive json
 var express = require('express');
 var bodyParser = require('body-parser')
 var app = express();
-//2) Added the model
 var Person = require('./models').Person
 var User = require('./models').User
-//6)Add cors allows our express and react to make calls to each other
+
 var cors = require('cors')
 const corsOptions = { origin: 'http://localhost:3001' }
 app.use(cors())
+
 app.use(express.static('public'))
 app.use(bodyParser.json())
 
+// const authorization = function(request, response, next){
+//   const token = request.query.authToken || request.body.authToken
+//   if(token){
+//     User.findOne({
+//       where: {authToken:token}
+//     }).then(user)=>{
+//       if(user){
+//         request.currentUser = user
+//         next()
+//       }else{
+//         response.status(401)
+//         response.json({message:'Authorization Invalid'})
+//       }
+//     }
+//   }else{
+//     response.status(401)
+//     response.json({message:'Authorization Invalid'})
+//   }
+// };
 
-//this get page is to test connectivity
 app.get('/', function (request, response) {
  response.json({message: 'Homepage success'});
 });
@@ -31,8 +47,30 @@ app.get('/list', function(request,response){
   })
 })
 
-//3) Ultimately we want to take the inputs and add a new row to the model using the create method.
-//4) To update multiple fields, we pass an object of the field to be updated with the contents we wish to update them to
+// app.post('/login', function(request,response){
+//   User.findOne({where:{email: request.body.user.email}}).then(function(user){
+//     if(user){
+//       if(user.verifyPassword(request.body.user.password)){
+//         response.status(200)
+//         response.json({
+//           user:user,
+//           message:"User Logged In!"
+//         })
+//       }else{
+//         response.status(401)
+//         response.json({
+//           message:"Could not log in!"
+//         })
+//       }
+//     }else{
+//       response.status(401)
+//       response.json({
+//         message:"Could not log in!"
+//       })
+//     }
+//   })
+// })
+
 app.post('/add', function (request, response) {
   let personInputs = request.body.person
   Person.create(personInputs)
@@ -50,7 +88,7 @@ app.post('/add', function (request, response) {
   })
 })
 
-app.post('/login', function (request, response) {
+app.post('/register', function (request, response) {
   let userInputs = request.body.user
   User.create(userInputs)
   .then((newUser)=>{

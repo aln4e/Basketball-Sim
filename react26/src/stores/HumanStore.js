@@ -23,14 +23,20 @@ class HumanStore extends EventEmitter{
 
   updateNewPerson(attributes){
     this.newPerson = attributes
-    this.message = "New human created!"
-    this.emit('change')
+    this.people.push(attributes)
+    this.updateMessage("New human created!")
+    this.emit('newRow')
   }
 
   updatePeople(attributes){
     this.people = attributes
-    this.message = "Human Index is loaded!"
-    this.emit('change')
+    this.updateMessage("Human Index is loaded!")
+    this.emit('allRows')
+  }
+
+  updateMessage(newMessage){
+    this.message = newMessage
+    this.emit('message')
   }
 
   handleActions(action){

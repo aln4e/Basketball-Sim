@@ -5,7 +5,7 @@ class UserStore extends EventEmitter{
   constructor(){
     super()
     // this.users = []
-    this.newUser = {}
+    this.user = null
     this.message = ""
   }
 
@@ -13,20 +13,26 @@ class UserStore extends EventEmitter{
     return this.message
   }
 
-  getNewUser(){
-    return this.newUser
+  getUser(){
+    return this.user
   }
 
-  addUser(attributes){
-    this.newUser = attributes
-    this.message = "User Created!"
-    this.emit('created')
+  updateUser(attributes){
+    this.user = attributes
   }
 
   handleActions(action){
     switch(action.type){
       case('CREATE_USER'):{
-        this.addUser(action)
+        this.updateUser(action.user)
+        this.message = "User Created!"
+        this.emit('userStore')
+        break
+      }
+      case('LOGIN_USER'):{
+        this.updateUser(action.user)
+        this.message = "User Logged In!"
+        this.emit('userStore')
         break
       }
       default:{}

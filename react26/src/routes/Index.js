@@ -21,7 +21,8 @@ class Index extends Component {
   }
 
   componentWillMount(){
-    store.on('change', this.updatePeople.bind(this))
+    store.on('newRow', this.updatePeople.bind(this))
+    store.on('allRows', this.updatePeople.bind(this))
   }
 
   renderPeople(){

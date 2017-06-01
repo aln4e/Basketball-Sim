@@ -1,4 +1,5 @@
 import Dispatcher from './Dispatcher'
+import userStore from './stores/UserStore'
 
 export function updatePeople(){
   const params = {
@@ -19,6 +20,7 @@ export function updatePeople(){
 }
 
 export function createHuman(attributes){
+  var self = this
   const params = {
     method:'POST',
     headers: {'Content-Type': 'application/json'},
@@ -26,7 +28,6 @@ export function createHuman(attributes){
   }
   fetch("http://localhost:3001/add", params).then(function(response){
     if(response.status === 200){
-      updatePeople()
       response.json().then(function(body){
         Dispatcher.dispatch({
           type: 'CREATE_PERSON',
@@ -35,11 +36,31 @@ export function createHuman(attributes){
       })
     }
   }).catch(function(error){
-    this.setState({
+    self.setState({
       message: 'there was an error: ' + error.errors.join("\n")
     })
   })
 }
+
+// export function login(attributes){
+//   const params = {
+//     method:'POST',
+//     headers: {'Content-Type': 'application/json'},
+//     body: JSON.stringify(attributes)
+//   }
+//   fetch("http://localhost:3001/login", params).then(function(response){
+//     if(response.status === 200){
+//       response.json().then(function(body){
+//         Dispatcher.dispatch({
+//           type: 'LOGIN_USER',
+//           user: body.user
+//         })
+//       })
+//     }
+//   }).catch(function(error){
+//     userStore.updateMessage("There was an error: " + error)
+//   })
+// }
 
 export function createUser(attributes){
   const params = {
@@ -47,7 +68,7 @@ export function createUser(attributes){
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(attributes)
   }
-  fetch("http://localhost:3001/login", params).then(function(response){
+  fetch("http://localhost:3001/register", params).then(function(response){
     if(response.status === 200){
       response.json().then(function(body){
         Dispatcher.dispatch({

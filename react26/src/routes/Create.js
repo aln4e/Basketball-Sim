@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import Header from '../components/Header'
 import {updatePeople, createHuman} from '../actions'
-// import store from '../stores/HumanStore'
+import store from '../stores/HumanStore'
 
 class Create extends Component {
   constructor(props){

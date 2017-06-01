@@ -1,33 +1,30 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import Header from '../components/Header'
-// import {login} from '../actions'
-import userStore from '../stores/UserStore'
+import {createUser} from '../actions'
+// import userStore from '../stores/UserStore'
 
 
-class Login extends Component {
+class Register extends Component {
   constructor(props){
     super(props)
     this.state = {
       user: {
+        // user_name:'',
         email: '',
-        password: ''
+        password: '',
+        // first_name:'',
+        // last_name:'',
+        // city:'',
+        // state:''
       },
       message:""
     }
   }
 
-  handleLogin(){
-    this.props.history.push('/')
-  }
-
-  componentWillMount(){
-    userStore.on('userStore', this.handleLogin.bind(this))
-  }
-
   handleSubmit(e){
     e.preventDefault()
-    // login(this.state)
+    createUser(this.state)
   }
 
   handleChange(e){
@@ -50,14 +47,10 @@ class Login extends Component {
         <div className='pull-right'>
           <Link to={`/create`} >Create Human </Link>
         </div>
-        <br />
-        <div className='pull-right'>
-          <Link to={`/register`} >Register as User </Link>
-        </div>
         <div className='col-md-4 col-md-offset-5'>
-          <h2 className="App-intro">Welcome! Please Log In Below</h2>
+          <h2 className="App-intro">Please Register Yourself</h2>
           <form onSubmit={this.handleSubmit.bind(this)}>
-            <div>
+            <div className='form-group'>
               <label>Email</label>
               <input type='text' name='email' value={this.state.user.email} onChange={this.handleChange.bind(this)} />
             </div>
@@ -75,4 +68,4 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default Register
