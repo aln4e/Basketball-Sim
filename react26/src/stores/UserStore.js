@@ -26,6 +26,7 @@ class UserStore extends EventEmitter{
       case('CREATE_USER'):{
         this.updateUser(action.user)
         this.message = "User Created!"
+        debugger
         this.emit('userStore')
         break
       }

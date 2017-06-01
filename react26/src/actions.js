@@ -10,7 +10,7 @@ export function updatePeople(){
     if(response.status === 200){
       response.json().then(function(body){
         Dispatcher.dispatch({
-          type: 'UPDATE_PEOPLE',
+          type: 'UPDATE_PERSON',
           people: body.people
         })
       })
@@ -19,7 +19,7 @@ export function updatePeople(){
   })
 }
 
-export function createHuman(attributes){
+export function createPerson(attributes){
   var self = this
   const params = {
     method:'POST',

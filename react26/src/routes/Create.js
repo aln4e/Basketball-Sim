@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import Header from '../components/Header'
-import {updatePeople, createHuman} from '../actions'
-import store from '../stores/HumanStore'
+import {updatePeople, createPerson} from '../actions'
+// import store from '../stores/PersonStore'
 
 class Create extends Component {
   constructor(props){
@@ -19,7 +19,7 @@ class Create extends Component {
 
   handleSubmit(e){
     e.preventDefault()
-    createHuman(this.state)
+    createPerson(this.state)
     updatePeople(this.state)
   }
 
@@ -37,7 +37,7 @@ class Create extends Component {
       <div>
         <Header />
         <div className='pull-right'>
-          <Link to={`/`} >Index of Humans</Link>
+          <Link to={`/`} >Index of People</Link>
         </div>
         <br />
         <div className='pull-right'>

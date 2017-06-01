@@ -6,7 +6,7 @@ import Register from './routes/Register'
 import Login from './routes/Login'
 import {updatePeople} from './actions'
 import userStore from './stores/UserStore'
-import store from './stores/HumanStore'
+import store from './stores/PersonStore'
 
 class App extends Component {
   constructor(props){
@@ -23,7 +23,7 @@ class App extends Component {
     })
   }
 
-  updateHumanMessage(){
+  updatePersonMessage(){
     this.setState({
       message: store.getMessage()
     })
@@ -31,10 +31,17 @@ class App extends Component {
 
   componentWillMount(){
     userStore.on('userStore', this.updateUserMessage.bind(this))
-    store.on('message', this.updateHumanMessage.bind(this))
-    store.on('allRows', this.updateHumanMessage.bind(this))
-    store.on('newRow', this.updateHumanMessage.bind(this))
+    store.on('message', this.updatePersonMessage.bind(this))
+    store.on('allRows', this.updatePersonMessage.bind(this))
+    store.on('newRow', this.updatePersonMessage.bind(this))
+  }
 
+  componentWillUpdate(){
+    debugger
+    userStore.on('userStore', this.updateUserMessage.bind(this))
+    store.on('message', this.updatePersonMessage.bind(this))
+    store.on('allRows', this.updatePersonMessage.bind(this))
+    store.on('newRow', this.updatePersonMessage.bind(this))
   }
 
   render() {

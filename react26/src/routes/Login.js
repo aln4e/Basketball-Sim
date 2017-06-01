@@ -44,11 +44,11 @@ class Login extends Component {
       <div>
         <Header />
         <div className='pull-right'>
-          <Link to={`/`} >Index of Humans </Link>
+          <Link to={`/`} >Index of People </Link>
         </div>
         <br />
         <div className='pull-right'>
-          <Link to={`/create`} >Create Human </Link>
+          <Link to={`/create`} >Create Person </Link>
         </div>
         <br />
         <div className='pull-right'>
