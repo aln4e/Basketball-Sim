@@ -21,6 +21,19 @@ class UserStore extends EventEmitter{
     this.user = attributes
   }
 
+  setUserFromLocal(){
+   let token = localStorage.getItem('authToken')
+   let expire = new Date(localStorage.getItem('authTokenExpiration'))
+   if(token && expire >= new Date()){
+     this.user = {
+       authToken: token,
+       authTokenExpiration: expire,
+       email: localStorage.getItem('email')
+     }
+     this.emit('login')
+   }
+ }
+
   handleActions(action){
     switch(action.type){
       case('CREATE_USER'):{
@@ -34,6 +47,10 @@ class UserStore extends EventEmitter{
         this.updateUser(action.user)
         this.message = "User Logged In!"
         this.emit('userStore')
+        break
+      }
+      case("CHECK_LOGIN"):{
+        this.setUserFromLocal()
         break
       }
       default:{}

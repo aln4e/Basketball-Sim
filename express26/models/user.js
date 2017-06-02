@@ -10,13 +10,13 @@ module.exports = function(sequelize, DataTypes) {
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
     city: DataTypes.STRING,
-    state: DataTypes.STRING
+    state: DataTypes.STRING,
     // encryptedPassword: {
     //   type: DataTypes.STRING,
     //   allowNull:false
     // },
-    // authToken: DataTypes.STRING,
-    // authTokenExpiration: DataTypes.DATE,
+    authToken: DataTypes.STRING,
+    authTokenExpiration: DataTypes.DATE
     // salt: DataTypes.STRING
   }, {
     classMethods: {
@@ -44,11 +44,13 @@ module.exports = function(sequelize, DataTypes) {
         }
       },
       setAuthToken(){
-        const token = uuid()
-        const expiration = new Date()
-        expiration.setMonth(expiration.getMonth() + 1)
-        this.setDataValue('authToken', expiration)
-      },
+         const token = uuid()
+         const expiration = new Date()
+         expiration.setMonth(expiration.getMonth() + 1)
+         this.setDataValue('authToken', token)
+         this.setDataValue('authTokenExpiration', expiration)
+       },
+
       encrypt(value){
         const salt = this.get('salt')
         return crypto.createHmac('sha512', salt)

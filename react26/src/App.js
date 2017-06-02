@@ -4,16 +4,18 @@ import Create from './routes/Create'
 import Index from './routes/Index'
 import Register from './routes/Register'
 import Login from './routes/Login'
-import {updatePeople} from './actions'
+import {updatePeople, checkLogin} from './actions'
 import userStore from './stores/UserStore'
 import store from './stores/PersonStore'
 
 class App extends Component {
   constructor(props){
     super(props)
+    checkLogin()
     updatePeople()
     this.state = {
-      message:""
+      message: store.getMessage(),
+      currentUser: userStore.getUser()
     }
   }
 
@@ -29,8 +31,15 @@ class App extends Component {
     })
   }
 
+  handleLogin(){
+  this.setState({
+    currentUser: userStore.getUser()
+  })
+}
+
   componentWillMount(){
     userStore.on('userStore', this.updateUserMessage.bind(this))
+    userStore.on('login', this.handleLogin.bind(this))
     store.on('message', this.updatePersonMessage.bind(this))
     store.on('allRows', this.updatePersonMessage.bind(this))
     store.on('newRow', this.updatePersonMessage.bind(this))

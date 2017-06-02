@@ -1,5 +1,11 @@
 import Dispatcher from './Dispatcher'
-import userStore from './stores/UserStore'
+// import userStore from './stores/UserStore'
+
+export function checkLogin(){
+  Dispatcher.dispatch({
+    type: 'CHECK_LOGIN',
+  })
+}
 
 export function updatePeople(){
   const params = {
