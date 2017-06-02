@@ -35,7 +35,7 @@ class App extends Component {
   this.setState({
     currentUser: userStore.getUser()
   })
-}
+  }
 
   componentWillMount(){
     userStore.on('userStore', this.updateUserMessage.bind(this))
@@ -47,6 +47,7 @@ class App extends Component {
 
   componentWillUpdate(){
     userStore.on('userStore', this.updateUserMessage.bind(this))
+    userStore.on('login', this.handleLogin.bind(this))
     store.on('message', this.updatePersonMessage.bind(this))
     store.on('allRows', this.updatePersonMessage.bind(this))
     store.on('newRow', this.updatePersonMessage.bind(this))

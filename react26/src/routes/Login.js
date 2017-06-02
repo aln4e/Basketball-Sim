@@ -23,6 +23,8 @@ class Login extends Component {
 
   componentWillMount(){
     userStore.on('userStore', this.handleLogin.bind(this))
+    userStore.on('login', this.handleLogin.bind(this))
+
   }
 
   handleSubmit(e){
