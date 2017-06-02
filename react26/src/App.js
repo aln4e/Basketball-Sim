@@ -37,7 +37,6 @@ class App extends Component {
   }
 
   componentWillUpdate(){
-    debugger
     userStore.on('userStore', this.updateUserMessage.bind(this))
     store.on('message', this.updatePersonMessage.bind(this))
     store.on('allRows', this.updatePersonMessage.bind(this))

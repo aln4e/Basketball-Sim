@@ -41,11 +41,15 @@ class Register extends Component {
       <div>
         <Header />
         <div className='pull-right'>
-          <Link to={`/`} >Index of People </Link>
+          <Link to={`/`} >Index</Link>
         </div>
         <br />
         <div className='pull-right'>
-          <Link to={`/create`} >Create Person </Link>
+          <Link to={`/create`} >Create</Link>
+        </div>
+        <br />
+        <div className='pull-right'>
+          <Link to={`/login`} >Login</Link>
         </div>
         <div className='col-md-4 col-md-offset-5'>
           <h2 className="App-intro">Please Register Yourself</h2>

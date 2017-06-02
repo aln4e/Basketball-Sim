@@ -42,11 +42,15 @@ class Index extends Component {
       <div>
         <Header />
         <div className= 'pull-right'>
-          <Link to={`/create`}>Create Person</Link>
+          <Link to={`/create`}>Create</Link>
         </div>
         <br />
         <div className='pull-right'>
-          <Link to={`/login`} >Register as User </Link>
+          <Link to={`/login`} >Login </Link>
+        </div>
+        <br />
+        <div className='pull-right'>
+          <Link to={`/register`} >Register </Link>
         </div>
         <h2>Person Registry</h2>
         <div className="cat-list row">
