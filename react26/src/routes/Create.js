@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import Header from '../components/Header'
-import {updatePeople, createPerson} from '../actions'
-// import store from '../stores/PersonStore'
+import {createPerson} from '../actions'
+import store from '../stores/PersonStore'
 
 class Create extends Component {
   constructor(props){
@@ -17,10 +17,17 @@ class Create extends Component {
     }
   }
 
+  redirect(){
+    this.props.history.push('/')
+  }
+
+  componentWillMount(){
+    store.on('newRow', this.redirect.bind(this))
+  }
+
   handleSubmit(e){
     e.preventDefault()
     createPerson(this.state)
-    updatePeople(this.state)
   }
 
   handleChange(e){

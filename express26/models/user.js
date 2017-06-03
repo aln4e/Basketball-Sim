@@ -1,6 +1,6 @@
 'use strict';
-const crypto = require('crypto')
-const uuid = require('uuid/v1')
+var crypto = require('crypto');
+const uuid = require('uuid/v1');
 
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
@@ -11,13 +11,13 @@ module.exports = function(sequelize, DataTypes) {
     last_name: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
-    // encryptedPassword: {
-    //   type: DataTypes.STRING,
-    //   allowNull:false
-    // },
+    encryptedPassword: {
+      type: DataTypes.STRING
+      // allowNull:false
+    },
     authToken: DataTypes.STRING,
-    authTokenExpiration: DataTypes.DATE
-    // salt: DataTypes.STRING
+    authTokenExpiration: DataTypes.DATE,
+    salt: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {

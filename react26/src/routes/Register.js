@@ -27,7 +27,7 @@ class Register extends Component {
   }
 
   componentWillMount(){
-    userStore.on('userStore', this.handleRegister.bind(this))
+    userStore.on('userCreated', this.handleRegister.bind(this))
   }
 
   handleSubmit(e){

@@ -11,11 +11,11 @@ import store from './stores/PersonStore'
 class App extends Component {
   constructor(props){
     super(props)
-    checkLogin()
+    // checkLogin()
     updatePeople()
     this.state = {
-      message: store.getMessage(),
-      currentUser: userStore.getUser()
+      message: store.getMessage()
+      // currentUser: userStore.getUser()
     }
   }
 
@@ -31,23 +31,25 @@ class App extends Component {
     })
   }
 
-  handleLogin(){
-  this.setState({
-    currentUser: userStore.getUser()
-  })
-  }
+  // handleLogin(){
+  // this.setState({
+  //   currentUser: userStore.getUser()
+  // })
+  // }
 
   componentWillMount(){
-    userStore.on('userStore', this.updateUserMessage.bind(this))
-    userStore.on('login', this.handleLogin.bind(this))
+    userStore.on('userCreated', this.updateUserMessage.bind(this))
+    userStore.on('userLoggedIn', this.updateUserMessage.bind(this))
+    userStore.on('message', this.updateUserMessage.bind(this))
     store.on('message', this.updatePersonMessage.bind(this))
     store.on('allRows', this.updatePersonMessage.bind(this))
     store.on('newRow', this.updatePersonMessage.bind(this))
   }
 
   componentWillUpdate(){
-    userStore.on('userStore', this.updateUserMessage.bind(this))
-    userStore.on('login', this.handleLogin.bind(this))
+    userStore.on('userCreated', this.updateUserMessage.bind(this))
+    userStore.on('userLoggedIn', this.updateUserMessage.bind(this))
+    userStore.on('message', this.updateUserMessage.bind(this))
     store.on('message', this.updatePersonMessage.bind(this))
     store.on('allRows', this.updatePersonMessage.bind(this))
     store.on('newRow', this.updatePersonMessage.bind(this))

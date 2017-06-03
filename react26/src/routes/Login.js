@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import Header from '../components/Header'
-// import {login} from '../actions'
+import {login} from '../actions'
 import userStore from '../stores/UserStore'
 
 
@@ -22,14 +22,12 @@ class Login extends Component {
   }
 
   componentWillMount(){
-    userStore.on('userStore', this.handleLogin.bind(this))
-    userStore.on('login', this.handleLogin.bind(this))
-
+    userStore.on('userLoggedIn', this.handleLogin.bind(this))
   }
 
   handleSubmit(e){
     e.preventDefault()
-    // login(this.state)
+    login(this.state)
   }
 
   handleChange(e){

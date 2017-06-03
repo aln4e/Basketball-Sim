@@ -47,29 +47,29 @@ app.get('/list', function(request,response){
   })
 })
 
-// app.post('/login', function(request,response){
-//   User.findOne({where:{email: request.body.user.email}}).then(function(user){
-//     if(user){
-//       if(user.verifyPassword(request.body.user.password)){
-//         response.status(200)
-//         response.json({
-//           user:user,
-//           message:"User Logged In!"
-//         })
-//       }else{
-//         response.status(401)
-//         response.json({
-//           message:"Could not log in!"
-//         })
-//       }
-//     }else{
-//       response.status(401)
-//       response.json({
-//         message:"Could not log in!"
-//       })
-//     }
-//   })
-// })
+app.post('/login', function(request,response){
+  User.findOne({where: {email: request.body.user.email}}).then(function(user){
+    if(user){
+      if(user.verifyPassword(request.body.user.password)){
+        response.status(200)
+        response.json({
+          user:user,
+          message:"User Logged In!"
+        })
+      }else{
+        response.status(401)
+        response.json({
+          message:"Could not log in!"
+        })
+      }
+    }else{
+      response.status(401)
+      response.json({
+        message:"Could not log in!"
+      })
+    }
+  })
+})
 
 app.post('/add', function (request, response) {
   let personInputs = request.body.person
