@@ -19,7 +19,6 @@ class UserStore extends EventEmitter{
 
   updateUser(attributes){
     this.user = attributes
-    
   }
 
   setUserFromLocal(){
@@ -40,7 +39,6 @@ class UserStore extends EventEmitter{
       case('CREATE_USER'):{
         this.updateUser(action.user)
         this.message = "User Created!"
-        debugger
         this.emit('userStore')
         break
       }

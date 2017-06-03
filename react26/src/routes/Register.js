@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import Header from '../components/Header'
 import {createUser} from '../actions'
-// import userStore from '../stores/UserStore'
+import userStore from '../stores/UserStore'
 
 
 class Register extends Component {
@@ -20,6 +20,14 @@ class Register extends Component {
       },
       message:""
     }
+  }
+
+  handleRegister(){
+    this.props.history.push('/')
+  }
+
+  componentWillMount(){
+    userStore.on('userStore', this.handleRegister.bind(this))
   }
 
   handleSubmit(e){
