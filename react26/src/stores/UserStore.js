@@ -26,18 +26,28 @@ class UserStore extends EventEmitter{
     this.emit('message')
   }
 
- //  setUserFromLocal(){
- //   let token = localStorage.getItem('authToken')
- //   let expire = new Date(localStorage.getItem('authTokenExpiration'))
- //   if(token && expire >= new Date()){
- //     this.user = {
- //       authToken: token,
- //       authTokenExpiration: expire,
- //       email: localStorage.getItem('email')
- //     }
- //     this.emit('login')
- //   }
- // }
+  setUserFromLocal(){
+   let token = localStorage.getItem('authToken')
+   let expire = new Date(localStorage.getItem('authTokenExpiration'))
+   if(token && expire >= new Date()){
+     this.user = {
+       authToken: token,
+       authTokenExpiration: expire,
+       email: localStorage.getItem('email')
+     }
+     this.emit('userAlreadyLoggedIn')
+   }
+ }
+
+ logout(){
+   this.user = null
+   localStorage.setItem('authToken', null)
+   localStorage.setItem('authTokenExpiration', null)
+   localStorage.setItem('email', null)
+   this.updateMessage('User logged out!')
+   this.emit('loggedOut')
+
+ }
 
   handleActions(action){
     switch(action.type){
@@ -48,18 +58,19 @@ class UserStore extends EventEmitter{
         break
       }
       case('LOGIN_USER'):{
-        debugger
         this.updateUser(action.user)
-        debugger
         this.updateMessage("User Logged In!")
-        debugger
         this.emit('userLoggedIn')
         break
       }
-      // case("CHECK_LOGIN"):{
-      //   this.setUserFromLocal()
-      //   break
-      // }
+      case("CHECK_LOGIN"):{
+        this.setUserFromLocal()
+        break
+      }
+      case("LOGOUT"):{
+        this.logout()
+        break
+      }
       default:{}
     }
   }

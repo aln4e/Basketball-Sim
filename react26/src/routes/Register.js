@@ -48,17 +48,7 @@ class Register extends Component {
     return (
       <div>
         <Header />
-        <div className='pull-right'>
-          <Link to={`/`} >Index</Link>
-        </div>
-        <br />
-        <div className='pull-right'>
-          <Link to={`/create`} >Create</Link>
-        </div>
-        <br />
-        <div className='pull-right'>
-          <Link to={`/login`} >Login</Link>
-        </div>
+    
         <div className='col-md-4 col-md-offset-5'>
           <h2 className="App-intro">Please Register Yourself</h2>
           <form onSubmit={this.handleSubmit.bind(this)}>

@@ -1,11 +1,17 @@
 import Dispatcher from './Dispatcher'
 import userStore from './stores/UserStore'
 
-// export function checkLogin(){
-//   Dispatcher.dispatch({
-//     type: 'CHECK_LOGIN',
-//   })
-// }
+export function checkLogin(){
+  Dispatcher.dispatch({
+    type: 'CHECK_LOGIN',
+  })
+}
+
+export function userLogout(){
+  Dispatcher.dispatch({
+    type: 'LOGOUT'
+  })
+}
 
 export function updatePeople(){
   const params = {

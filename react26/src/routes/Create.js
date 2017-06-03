@@ -43,17 +43,7 @@ class Create extends Component {
     return (
       <div>
         <Header />
-        <div className='pull-right'>
-          <Link to={`/`} >Index</Link>
-        </div>
-        <br />
-        <div className='pull-right'>
-          <Link to={`/login`}>Login </Link>
-        </div>
-        <br />
-        <div className='pull-right'>
-          <Link to={`/register`}>Register</Link>
-        </div>
+        
 
         <div className='container'>
           <div className='row'>

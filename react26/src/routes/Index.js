@@ -7,7 +7,6 @@ import PersonListing from '../components/Listing'
 class Index extends Component {
   constructor(props){
     super(props)
-
     this.state = {
       people: store.getPeople(),
       message: store.getMessage()
@@ -41,17 +40,7 @@ class Index extends Component {
     return (
       <div>
         <Header />
-        <div className= 'pull-right'>
-          <Link to={`/create`}>Create</Link>
-        </div>
-        <br />
-        <div className='pull-right'>
-          <Link to={`/login`} >Login </Link>
-        </div>
-        <br />
-        <div className='pull-right'>
-          <Link to={`/register`} >Register </Link>
-        </div>
+        
         <h2>Person Registry</h2>
         <div className="cat-list row">
           {this.renderPeople()}

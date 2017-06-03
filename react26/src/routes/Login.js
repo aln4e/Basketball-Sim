@@ -43,17 +43,7 @@ class Login extends Component {
     return (
       <div>
         <Header />
-        <div className='pull-right'>
-          <Link to={`/`} >Index</Link>
-        </div>
-        <br />
-        <div className='pull-right'>
-          <Link to={`/create`} >Create</Link>
-        </div>
-        <br />
-        <div className='pull-right'>
-          <Link to={`/register`} >Register</Link>
-        </div>
+    
         <div className='col-md-4 col-md-offset-5'>
           <h2 className="App-intro">Welcome! Please Log In Below</h2>
           <form onSubmit={this.handleSubmit.bind(this)}>
