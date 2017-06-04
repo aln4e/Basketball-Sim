@@ -17,14 +17,6 @@ class Create extends Component {
     }
   }
 
-  redirect(){
-    this.props.history.push('/')
-  }
-
-  componentWillMount(){
-    store.on('newRow', this.redirect.bind(this))
-  }
-
   handleSubmit(e){
     e.preventDefault()
     createPerson(this.state)
@@ -43,7 +35,7 @@ class Create extends Component {
     return (
       <div>
         <Header />
-        
+
 
         <div className='container'>
           <div className='row'>

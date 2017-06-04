@@ -50,7 +50,7 @@ class App extends Component {
   }
 
   componentWillMount(){
-    userStore.on('userAlreadyLoggedIn', this.handleLogin.bind(this))
+    userStore.on('userLoggedIn', this.handleLogin.bind(this))
     userStore.on('userCreated', this.updateUserMessage.bind(this))
     userStore.on('userLoggedIn', this.updateUserMessage.bind(this))
     userStore.on('message', this.updateUserMessage.bind(this))

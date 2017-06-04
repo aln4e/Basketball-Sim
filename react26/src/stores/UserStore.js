@@ -35,7 +35,7 @@ class UserStore extends EventEmitter{
        authTokenExpiration: expire,
        email: localStorage.getItem('email')
      }
-     this.emit('userAlreadyLoggedIn')
+     this.emit('userLoggedIn')
    }
  }
 
