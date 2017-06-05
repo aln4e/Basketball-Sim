@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import Header from '../components/Header'
-import {createPerson} from '../actions'
+import {createPerson, loginOrRedirect} from '../actions'
 import store from '../stores/PersonStore'
 
 class Create extends Component {
@@ -15,6 +15,14 @@ class Create extends Component {
       },
       message:""
     }
+  }
+
+  componentWillMount(){
+    return loginOrRedirect(this.props)
+  }
+
+  componentWillUpdate(){
+    return loginOrRedirect(this.props)
   }
 
   handleSubmit(e){
@@ -35,13 +43,11 @@ class Create extends Component {
     return (
       <div>
         <Header />
-
-
         <div className='container'>
-          <div className='row'>
+          <div className='1'>
             <div className='col-xs-6 col-xs-offset-3'>
               <div className='panel panel-default'>
-                <div className='panel-body'>
+                <div className='1'>
                   <h2>Please fill out this form!</h2>
                     <form onSubmit={this.handleSubmit.bind(this)}>
 

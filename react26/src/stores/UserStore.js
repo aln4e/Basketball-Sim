@@ -19,6 +19,10 @@ class UserStore extends EventEmitter{
 
   updateUser(attributes){
     this.user = attributes
+    localStorage.setItem('authToken', attributes.authToken)
+    localStorage.setItem('authTokenExpiration', attributes.authTokenExpiration)
+    localStorage.setItem('email', attributes.email)
+    this.emit('userLoggedIn')
   }
 
   updateMessage(str){

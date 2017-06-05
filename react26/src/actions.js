@@ -1,6 +1,15 @@
 import Dispatcher from './Dispatcher'
 import userStore from './stores/UserStore'
 
+export function loginOrRedirect(props){
+  let currentUser = userStore.getUser()
+  if(currentUser === null){
+    props.history.push('/login')
+    return false
+  }
+  return true
+}
+
 export function checkLogin(){
   Dispatcher.dispatch({
     type: 'CHECK_LOGIN',

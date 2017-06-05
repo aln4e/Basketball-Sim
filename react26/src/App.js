@@ -37,7 +37,7 @@ class App extends Component {
   })
   }
 
-  login(){
+  checkLoginStatus(){
     if(this.state.currentUser){
       return(<a onClick={this.handleLogout.bind(this)}>{this.state.currentUser.email}</a>)
     }else{
@@ -79,7 +79,7 @@ class App extends Component {
                 <Link to='/'>Index</Link> |
                 <Link to='/create'>Create</Link> |
                 <Link to='/register'>Register</Link> |
-                {this.login()}
+                {this.checkLoginStatus()}
               </div>
             </div>
 
