@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
 import Header from '../components/Header'
 import store from '../stores/PersonStore'
 import PersonListing from '../components/Listing'
@@ -40,7 +39,7 @@ class Index extends Component {
     return (
       <div>
         <Header />
-        
+
         <h2>Person Registry</h2>
         <div className="cat-list row">
           {this.renderPeople()}

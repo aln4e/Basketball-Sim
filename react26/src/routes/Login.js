@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
 import Header from '../components/Header'
 import {login} from '../actions'
 import userStore from '../stores/UserStore'
@@ -43,7 +42,7 @@ class Login extends Component {
     return (
       <div>
         <Header />
-    
+
         <div className='col-md-4 col-md-offset-5'>
           <h2 className="App-intro">Welcome! Please Log In Below</h2>
           <form onSubmit={this.handleSubmit.bind(this)}>

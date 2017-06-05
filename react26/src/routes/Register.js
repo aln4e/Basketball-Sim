@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
 import Header from '../components/Header'
 import {createUser} from '../actions'
 import userStore from '../stores/UserStore'
@@ -48,7 +47,7 @@ class Register extends Component {
     return (
       <div>
         <Header />
-    
+
         <div className='col-md-4 col-md-offset-5'>
           <h2 className="App-intro">Please Register Yourself</h2>
           <form onSubmit={this.handleSubmit.bind(this)}>

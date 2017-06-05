@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 import Header from '../components/Header';
 import {createPerson, loginOrRedirect} from '../actions';
-import store from '../stores/PersonStore';
+import store from '../stores/PersonStore'
 import ImagesUploader from 'react-images-uploader'
 import 'react-images-uploader/styles.css';
 
@@ -19,11 +18,12 @@ class Create extends Component {
     }
   }
 
-  componentWillMount(){
-    return loginOrRedirect(this.props)
+  redirect(){
+    this.props.history.push('/')
   }
 
-  componentWillUpdate(){
+  componentWillMount(){
+    store.on('newRow', this.redirect.bind(this))
     return loginOrRedirect(this.props)
   }
 
