@@ -1,12 +1,14 @@
 var express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var app = express();
-var Person = require('./models').Person
-var User = require('./models').User
+var Person = require('./models').Person;
+var User = require('./models').User;
+var corsPrefetch = require('cors-prefetch-middleware').default;
+var imagesUpload = require('images-upload-middleware').default;
 
-var cors = require('cors')
-const corsOptions = { origin: 'http://localhost:3001' }
-app.use(cors())
+// var cors = require('cors')
+// const corsOptions = { origin: 'http://localhost:3001' }
+app.use(corsPrefetch)
 
 app.use(express.static('public'))
 app.use(bodyParser.json())
@@ -15,7 +17,7 @@ app.use(bodyParser.json())
 //   const token = request.query.authToken || request.body.authToken
 //   if(token){
 //     User.findOne({
-//       where: {authToken:token}
+//       where: {authToken: token}
 //     }).then(user)=>{
 //       if(user){
 //         request.currentUser = user
@@ -104,6 +106,11 @@ app.post('/register', function (request, response) {
     })
   })
 })
+
+app.post('/files', imagesUpload(
+  './public/files',
+  'http://localhost:3001/files'
+));
 
 //need a port to listen for requests
 app.listen(3001, function () {

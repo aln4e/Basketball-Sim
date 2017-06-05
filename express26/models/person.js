@@ -3,7 +3,8 @@ module.exports = function(sequelize, DataTypes) {
   var Person = sequelize.define('Person', {
     name: DataTypes.STRING,
     age: DataTypes.INTEGER,
-    sex: DataTypes.STRING
+    sex: DataTypes.STRING,
+    imageUrl: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
@@ -16,7 +17,8 @@ module.exports = function(sequelize, DataTypes) {
         return {
           name: this.get('name'),
           age: this.get('age'),
-          sex: this.get('sex')
+          sex: this.get('sex'),
+          imageUrl: this.get('imageUrl')
         }
       }
     }

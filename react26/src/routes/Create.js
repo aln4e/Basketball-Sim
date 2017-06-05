@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
-import Header from '../components/Header'
-import {createPerson, loginOrRedirect} from '../actions'
-import store from '../stores/PersonStore'
+import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
+import Header from '../components/Header';
+import {createPerson, loginOrRedirect} from '../actions';
+import store from '../stores/PersonStore';
+import ImagesUploader from 'react-images-uploader'
+import 'react-images-uploader/styles.css';
 
 class Create extends Component {
   constructor(props){
@@ -39,6 +41,20 @@ class Create extends Component {
     })
   }
 
+  handleImage(err, response){
+    if(err){
+
+    }else{
+      let event = {
+        target:{
+          name:'imageUrl',
+          value:response
+        }
+      }
+      this.handleChange(event)
+    }
+  }
+
   render() {
     return (
       <div>
@@ -49,6 +65,15 @@ class Create extends Component {
               <div className='panel panel-default'>
                 <div className='1'>
                   <h2>Please fill out this form!</h2>
+
+                  <ImagesUploader
+                    url="http://localhost:3001/files"
+                    optimisticPreviews
+                    multiple={false}
+                    onLoadEnd={this.handleImage.bind(this)}
+                    label="Upload a picture"
+                    />
+
                     <form onSubmit={this.handleSubmit.bind(this)}>
 
                     <div className='row'>

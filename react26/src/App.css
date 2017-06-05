@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.pics {
+  max-width:150px;
+  max-height:150px;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
